@@ -1,0 +1,94 @@
+Started by an SCM change
+Obtained Jenkinsfile from git https://github.com/YoanaBast/SEDO-09-2026-Regular-Exam-2/
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/YoanaBast/SEDO-09-2026-Regular-Exam-2/ # timeout=10
+Fetching upstream changes from https://github.com/YoanaBast/SEDO-09-2026-Regular-Exam-2/
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/YoanaBast/SEDO-09-2026-Regular-Exam-2/ +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision a8cf1ecc04f86fd55b46b539fe18458c89fe43a6 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f a8cf1ecc04f86fd55b46b539fe18458c89fe43a6 # timeout=10
+Commit message: "Add Jenkins message to test file"
+ > git rev-list --no-walk e231afbe2856bc2f05183a3abd38e4e5552bf57d # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Restore dependencies)
+[Pipeline] sh
++ dotnet restore
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ dotnet build --no-restore
+Microsoft (R) Build Engine version 17.0.4+85d71072f for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Homies.Data -> /var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2/Homies.Data/bin/Debug/net6.0/Homies.Data.dll
+  Homies -> /var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2/Homies/bin/Debug/net6.0/Homies.dll
+  Homies.Tests -> /var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2/Homies.Tests/bin/Debug/net6.0/Homies.Tests.dll
+  Homies.IntegrationTests -> /var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2/Homies.IntegrationTests/bin/Debug/net6.0/Homies.IntegrationTests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.85
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
++ dotnet test --no-build --verbosity normal
+Build started 10/24/2026 10:51:11AM.
+     1>Project "/var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2/Homies.sln" on node 1 (VSTest target(s)).
+     1>ValidateSolutionConfiguration:
+         Building solution configuration "Debug|Any CPU".
+Test run for /var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2/Homies.Tests/bin/Debug/net6.0/Homies.Tests.dll (.NETCoreApp,Version=v6.0)
+Microsoft (R) Test Execution Command Line Tool Version 17.0.3+cc7fb0593127e24f55ce016fb3ac85b5b2857fec
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     4, Skipped:     0, Total:     4, Duration: 651 ms - /var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2/Homies.Tests/bin/Debug/net6.0/Homies.Tests.dll (net6.0)
+Test run for /var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2/Homies.IntegrationTests/bin/Debug/net6.0/Homies.IntegrationTests.dll (.NETCoreApp,Version=v6.0)
+Microsoft (R) Test Execution Command Line Tool Version 17.0.3+cc7fb0593127e24f55ce016fb3ac85b5b2857fec
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     5, Skipped:     0, Total:     5, Duration: 762 ms - /var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2/Homies.IntegrationTests/bin/Debug/net6.0/Homies.IntegrationTests.dll (net6.0)
+     1>Done Building Project "/var/lib/jenkins/workspace/YoanaBast SEDO-09-2026-Regular-Exam-2/Homies.sln" (VSTest target(s)).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.35
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
